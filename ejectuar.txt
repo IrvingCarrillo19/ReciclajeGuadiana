@@ -1,0 +1,3 @@
+Set-ExecutionPolicy -Scope CurrentUser unrestricted
+
+si te sale error en la terminal al escribir ng serve utiliza el comando de aqui arriba para ejecutar el proyecto
