@@ -1,0 +1,6 @@
+@angular/common
+chart.js
+ng2-charts
+rxjs
+@angular/material
+@angular/cdk
