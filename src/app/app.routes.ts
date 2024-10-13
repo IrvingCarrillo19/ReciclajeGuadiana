@@ -7,11 +7,19 @@ import { TablesComponent } from './tables/tables.component';
 import path from 'path';
 import { Component } from '@angular/core';
 import { table } from 'console';
+import { ContactosComponent } from './contactos/contactos.component';
 
 export const routes: Routes = [
-    { path: 'dashboard', component: LayoutComponent , children: [{path: '', component: MainComponent}, 
-        {path: 'tables', component: TablesComponent}]
-    }
+  {
+    path: 'dashboard',
+    component: LayoutComponent,
+    children: [
+      { path: '', component: MainComponent },
+      { path: 'tables', component: TablesComponent },
+      { path: '', component: MainComponent },
+      { path: 'contactos', component: ContactosComponent },
+    ],
+  },
 ];
 
 //dashboard/tables
