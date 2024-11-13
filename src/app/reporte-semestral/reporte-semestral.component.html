@@ -1,0 +1,60 @@
+<div class="mt-8 mx-8">
+  <div
+    class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-xl overflow-hidden w-full"
+  >
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full">
+      <div class="overflow-x-auto overflow-y-scroll max-h-96 w-full">
+        <table
+          class="w-full text-lg text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto"
+        >
+          <thead class="sticky top-0 z-10 bg-gray-100 dark:bg-gray-800">
+            <tr
+              class="text-sm font-bold tracking-wide text-left text-gray-600 uppercase border-b dark:border-gray-700 dark:text-gray-400"
+            >
+              <th scope="col" class="px-6 py-4">Proveedor</th>
+              <th scope="col" class="px-6 py-4">Enero</th>
+              <th scope="col" class="px-6 py-4">Febrero</th>
+              <th scope="col" class="px-6 py-4">Marzo</th>
+              <th scope="col" class="px-6 py-4">Abril</th>
+              <th scope="col" class="px-6 py-4">Mayo</th>
+              <th scope="col" class="px-6 py-4">Junio</th>
+              <th scope="col" class="px-6 py-4">Merma Generada</th>
+              <th scope="col" class="px-6 py-4">Material Total</th>
+            </tr>
+          </thead>
+          <tbody
+            class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-900"
+          >
+            <!-- Registros dinámicos -->
+            <tr
+              class="bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 cursor-pointer transition-transform duration-200 transform hover:scale-102 origin-center hover:z-10"
+            >
+              <th class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                Proveedor A
+              </th>
+              <td class="px-6 py-4">1,200,000</td>
+              <td class="px-6 py-4">1,200,000</td>
+              <td class="px-6 py-4">1,200,000</td>
+              <td class="px-6 py-4">1,200,000</td>
+              <td class="px-6 py-4">1,200,000</td>
+              <td class="px-6 py-4">1,200,000</td>
+              <td class="px-6 py-4">1,200,000</td>
+              <td class="px-6 py-4">1,200,000</td>
+            </tr>
+            <!-- Repite el bloque anterior para otros proveedores -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="flex justify-end mt-8 mb-4 mr-12">
+  <button
+    class="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-500"
+    data-modal-target="crear/modificar-reportes-modal"
+    data-modal-toggle="crear/modificar-reportes-modal"
+  >
+    Descargar PDF
+  </button>
+</div>

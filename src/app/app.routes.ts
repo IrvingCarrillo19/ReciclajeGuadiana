@@ -8,6 +8,8 @@ import path from 'path';
 import { Component } from '@angular/core';
 import { table } from 'console';
 import { ContactosComponent } from './contactos/contactos.component';
+import { ReporteAnualComponent } from './reporte-anual/reporte-anual.component';
+import { ReporteSemestralComponent } from './reporte-semestral/reporte-semestral.component';
 
 export const routes: Routes = [
   {
@@ -18,6 +20,8 @@ export const routes: Routes = [
       { path: 'tables', component: TablesComponent },
       { path: '', component: MainComponent },
       { path: 'contactos', component: ContactosComponent },
+      { path: 'reporte-anual', component: ReporteAnualComponent },
+      { path: 'reporte-semestral', component: ReporteSemestralComponent },
     ],
   },
 ];

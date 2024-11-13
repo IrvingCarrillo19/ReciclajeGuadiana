@@ -1,120 +1,213 @@
-<div class="container mx-auto p-6 grid grid-cols-1 xl:grid-cols-3 gap-6">
-  <!-- Columna de la izquierda: Información y gráficos -->
-  <div class="col-span-1 space-y-6">
-    <!-- Información de contacto -->
+<div class="container mx-auto p-8">
+  <!-- Sección de tarjetas -->
+  <div class="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
+    <!-- Ganancias de Material -->
     <div
-      class="bg-gray-50 dark:bg-gray-800 shadow-lg rounded-lg p-6 transition-transform duration-200 transform hover:scale-105 origin-center hover:z-10"
+      class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md p-8 hover:scale-105 transition-transform"
     >
-      <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-50 mb-4">
-        Información de Contacto
-      </h3>
-      <div class="flex flex-wrap">
-        <div class="w-full md:w-3/4">
-          <p><strong>Nombre de la Empresa:</strong> Empresa XYZ</p>
-          <p><strong>Propietario:</strong> Persona moral / física</p>
-          <p><strong>Teléfono:</strong> +52 123 456 7890</p>
-          <p><strong>Email:</strong> ejemplocorreo.com</p>
-        </div>
-        <!-- Logo de la empresa -->
-        <div class="w-full md:w-1/4 flex justify-end">
-          <div class="w-24 h-24 bg-black"></div>
-        </div>
+      <div
+        class="bg-clip-border rounded-xl overflow-hidden bg-gradient-to-tr from-green-600 to-green-400 text-white shadow-green-500/40 shadow-lg absolute -top-6 left-6 grid h-16 w-16 place-items-center"
+      >
+        <!-- Icono de material -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="w-6 h-6 text-white"
+        >
+          <path d="M3 12l9-8.5L21 12l-9 8.5L3 12z" />
+        </svg>
+      </div>
+      <div class="pt-12 text-right">
+        <p class="text-sm font-normal text-green-600">Material Earnings</p>
+        <h4 class="text-2xl font-semibold text-gray-900">$30k</h4>
+      </div>
+      <div class="border-t border-gray-100 pt-4">
+        <p class="text-base font-normal text-gray-600">
+          <strong class="text-green-500">+40%</strong> than last month
+        </p>
       </div>
     </div>
 
-    <!-- Gráfico de ejemplo -->
+    <!-- Ganancias Monetarias -->
     <div
-      class="bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 flex flex-col justify-center transition-transform duration-200 transform hover:scale-105 origin-center hover:z-10"
+      class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md p-8 hover:scale-105 transition-transform"
+    >
+      <div
+        class="bg-clip-border rounded-xl overflow-hidden bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-blue-500/40 shadow-lg absolute -top-6 left-6 grid h-16 w-16 place-items-center"
+      >
+        <!-- Icono de ganancias -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="w-6 h-6 text-white"
+        >
+          <path
+            d="M12 3c5 0 9 3.5 9 9s-4 9-9 9-9-4-9-9 4-9 9-9zm1 10V7h-2v8h6v-2h-4z"
+          />
+        </svg>
+      </div>
+      <div class="pt-12 text-right">
+        <p class="text-sm font-normal text-blue-600">Monetary Gains</p>
+        <h4 class="text-2xl font-semibold text-gray-900">$75k</h4>
+      </div>
+      <div class="border-t border-gray-100 pt-4">
+        <p class="text-base font-normal text-gray-600">
+          <strong class="text-green-500">+25%</strong> than last week
+        </p>
+      </div>
+    </div>
+
+    <!-- Pérdidas Monetarias -->
+    <div
+      class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md p-8 hover:scale-105 transition-transform"
+    >
+      <div
+        class="bg-clip-border rounded-xl overflow-hidden bg-gradient-to-tr from-red-600 to-red-400 text-white shadow-red-500/40 shadow-lg absolute -top-6 left-6 grid h-16 w-16 place-items-center"
+      >
+        <!-- Icono de pérdidas -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="w-6 h-6 text-white"
+        >
+          <path
+            d="M12 21c5-3 9-8 9-14 0-2-2-4-4-4s-4 2-4 4c0 2 2 4 4 4s4-2 4-4-4-9-9-9-9 7-9 9c0 4 4 9 9 9zm0-2.3l.6-.6c-2.4-.3-5.5-.9-8.1-2.1-.5-.3-1 .1-.8.7l.6 1.7c.2.5.7.9 1.2.6 2.8-1 6-1.7 8.4-1.7s5.7.7 8.5 1.7c.5.3 1-.1.7-.6l-.6-1.7c-.3-.5-.9-1.1-1.4-.7-2.5 1.3-5.7 1.9-8.1 2.1l.6.6z"
+          />
+        </svg>
+      </div>
+      <div class="pt-12 text-right">
+        <p class="text-sm font-normal text-red-600">Monetary Losses</p>
+        <h4 class="text-2xl font-semibold text-gray-900">-$15k</h4>
+      </div>
+      <div class="border-t border-gray-100 pt-4">
+        <p class="text-base font-normal text-gray-600">
+          <strong class="text-red-500">-10%</strong> than last week
+        </p>
+      </div>
+    </div>
+
+    <!-- Nuevos Proveedores -->
+    <div
+      class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md p-8 hover:scale-105 transition-transform"
+    >
+      <div
+        class="bg-clip-border rounded-xl overflow-hidden bg-gradient-to-tr from-purple-600 to-purple-400 text-white shadow-purple-500/40 shadow-lg absolute -top-6 left-6 grid h-16 w-16 place-items-center"
+      >
+        <!-- Icono de proveedores -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="w-6 h-6 text-white"
+        >
+          <path
+            d="M16.5 12.5c1.5-2 3-3 3-5 0-3.1-3.4-5-7.5-5S4.5 4.4 4.5 7.5c0 2 1.5 3 3 5l-2.5 6.7c-.2.5 0 1 .4 1.2l1.8.7c.5.2 1.1 0 1.2-.4L12 14h0l3.6 8c.2.4.8.6 1.2.4l1.8-.7c.5-.2.7-.7.4-1.2L16.5 12.5z"
+          />
+        </svg>
+      </div>
+      <div class="pt-12 text-right">
+        <p class="text-sm font-normal text-purple-600">New Suppliers</p>
+        <h4 class="text-2xl font-semibold text-gray-900">12</h4>
+      </div>
+      <div class="border-t border-gray-100 pt-4">
+        <p class="text-base font-normal text-gray-600">+5 new this month</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+    <!-- Gráfica semestral -->
+    <div
+      class="bg-white rounded-lg shadow dark:bg-gray-800 p-8 flex flex-col justify-center transition-transform duration-200 transform hover:scale-105 origin-center hover:z-10"
     >
       <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-50 mb-4">
-        Gráfica de Desempeño
+        Gráfica de 1
       </h3>
       <div class="flex justify-center items-center w-full h-full">
         <apx-chart
           class="w-full h-full"
           [colors]="chartOptions?.colors"
-          [series]="chartOptions?.series"
+          [series]="series"
           [chart]="chartOptions?.chart"
           [xaxis]="chartOptions?.xaxis"
+          [dataLabels]="chartOptions?.dataLabels"
+        ></apx-chart>
+      </div>
+    </div>
+    <!-- Gráfica anual -->
+    <div
+      class="bg-white rounded-lg shadow dark:bg-gray-800 p-8 flex flex-col justify-center transition-transform duration-200 transform hover:scale-105 origin-center hover:z-10"
+    >
+      <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-50 mb-4">
+        Gráfica de 2
+      </h3>
+      <div class="flex justify-center items-center w-full h-full">
+        <apx-chart
+          class="w-full h-full"
+          [colors]="chartOptions?.colors"
+          [series]="series2"
+          [chart]="chartOptions?.chart"
+          [xaxis]="chartOptions?.xaxis"
+          [dataLabels]="chartOptions?.dataLabels"
         ></apx-chart>
       </div>
     </div>
   </div>
 
-  <!-- Columna central: Tabla de proveedores -->
-  <div class="col-span-2 space-y-6">
-    <!-- Tabla de Proveedores -->
+  <!-- Tabla de Reportes -->
+  <div class="mt-8">
     <div
-      class="bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 transition-transform duration-200 transform hover:scale-105 origin-center hover:z-10"
+      class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-xl overflow-hidden w-full"
     >
-      <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-50 mb-4">
-        Proveedores
-      </h3>
-      <table class="min-w-full table-auto text-left">
-        <thead>
-          <tr>
-            <th class="px-4 py-2">Proveedor</th>
-            <th class="px-4 py-2">Contacto</th>
-            <th class="px-4 py-2">Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="border px-4 py-2">Proveedor 1</td>
-            <td class="border px-4 py-2">+52 123 456 7890</td>
-            <td class="border px-4 py-2">email1ejemplo.com</td>
-          </tr>
-          <tr>
-            <td class="border px-4 py-2">Proveedor 2</td>
-            <td class="border px-4 py-2">+52 098 765 4321</td>
-            <td class="border px-4 py-2">email2ejemplo.com</td>
-          </tr>
-          <!-- Agrega más filas según sea necesario -->
-        </tbody>
-      </table>
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full">
+        <div class="overflow-x-auto overflow-y-scroll max-h-96 w-full">
+          <table
+            class="w-full text-lg text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto"
+          >
+            <thead class="sticky top-0 z-10 bg-gray-100 dark:bg-gray-800">
+              <tr
+                class="text-sm font-bold tracking-wide text-left text-gray-600 uppercase border-b dark:border-gray-700 dark:text-gray-400"
+              >
+                <th scope="col" class="px-6 py-4">Proveedor</th>
+                <th scope="col" class="px-6 py-4">Enero</th>
+                <th scope="col" class="px-6 py-4">Febrero</th>
+                <th scope="col" class="px-6 py-4">Marzo</th>
+                <th scope="col" class="px-6 py-4">Abril</th>
+                <th scope="col" class="px-6 py-4">Mayo</th>
+                <th scope="col" class="px-6 py-4">Junio</th>
+                <th scope="col" class="px-6 py-4">Merma Generada</th>
+                <th scope="col" class="px-6 py-4">Material Total</th>
+              </tr>
+            </thead>
+            <tbody
+              class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-900"
+            >
+              <!-- Registros dinámicos -->
+              <tr
+                class="bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200"
+              >
+                <th
+                  class="px-6 py-4 font-semibold text-gray-900 dark:text-white"
+                >
+                  Proveedor A
+                </th>
+                <td class="px-6 py-4">1200</td>
+                <td class="px-6 py-4">1300</td>
+                <td class="px-6 py-4">1250</td>
+                <td class="px-6 py-4">1400</td>
+                <td class="px-6 py-4">1500</td>
+                <td class="px-6 py-4">1450</td>
+                <td class="px-6 py-4">50</td>
+                <td class="px-6 py-4">7300</td>
+              </tr>
+              <!-- Repite el bloque anterior para otros proveedores -->
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-
-    <!-- Tabla de Últimos Reportes -->
-    <div
-      class="bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 transition-transform duration-200 transform hover:scale-105 origin-center hover:z-10"
-    >
-      <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-50 mb-4">
-        Últimos Reportes Generados
-      </h3>
-      <table class="min-w-full table-auto text-left">
-        <thead>
-          <tr>
-            <th class="px-4 py-2">Fecha</th>
-            <th class="px-4 py-2">Descripción</th>
-            <th class="px-4 py-2">Estatus</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="border px-4 py-2">01/10/2024</td>
-            <td class="border px-4 py-2">Reporte A</td>
-            <td class="border px-4 py-2">Completado</td>
-          </tr>
-          <tr>
-            <td class="border px-4 py-2">02/10/2024</td>
-            <td class="border px-4 py-2">Reporte B</td>
-            <td class="border px-4 py-2">Pendiente</td>
-          </tr>
-          <!-- Agrega más filas según sea necesario -->
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-<!-- Fila inferior para Ganancias o Resumen -->
-<div class="container mx-auto p-6 grid grid-cols-1 xl:grid-cols-1 gap-6">
-  <div
-    class="bg-gray-50 dark:bg-gray-800 shadow-lg rounded-lg p-6 transition-transform duration-200 transform hover:scale-105 origin-center hover:z-10"
-  >
-    <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-50 mb-4">
-      Ganancias Totales
-    </h3>
-    <div class="text-4xl text-gray-900 dark:text-gray-50">$250,000</div>
   </div>
 </div>
