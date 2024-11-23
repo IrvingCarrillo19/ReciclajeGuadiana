@@ -10,8 +10,13 @@ import { table } from 'console';
 import { ContactosComponent } from './contactos/contactos.component';
 import { ReporteAnualComponent } from './reporte-anual/reporte-anual.component';
 import { ReporteSemestralComponent } from './reporte-semestral/reporte-semestral.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 export const routes: Routes = [
+  {
+    path: '',
+    component: LoginPageComponent,
+  },
   {
     path: 'dashboard',
     component: LayoutComponent,
