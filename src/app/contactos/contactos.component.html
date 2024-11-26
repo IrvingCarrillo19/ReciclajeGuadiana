@@ -144,7 +144,8 @@
                 </button>
               </td>
               <td class="px-6 py-4">
-                <button
+                <button 
+                (click)="deleteProvedor(provider.id_provedor)"
                   class="w-full px-4 py-2 text-sm font-semibold text-red-700 bg-red-100 rounded-lg hover:bg-red-200 dark:bg-red-700 dark:text-red-100 dark:hover:bg-red-600"
                 >
                   Eliminar
@@ -242,6 +243,7 @@
             >
             <select
               id="licencia-ambiental"
+              name="licenciaAmbiental"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               required
             >
