@@ -7,11 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  private BaseUrl = 'http://localhost:8000';
+  private BaseUrl = 'http://127.0.0.1:8000';
 
   constructor(private http: HttpClient) { }
 
-  //Usuarios
+  //USUARIOS
   getUsuarios(): Observable<any>{
     return this.http.get(`${this.BaseUrl}/usuarios`);
   }

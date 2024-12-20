@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef,OnInit } from '@angular/core';
 import { FlowbiteService } from '../flowbite.service';
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import {
@@ -23,7 +23,13 @@ import {
   ApexStates,
   ApexTheme,
 } from 'ng-apexcharts';
-
+import { ApiService } from '../services/api.service';
+import { CommonModule } from '@angular/common';
+import { error } from 'node:console';
+import { response } from 'express';
+import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validator } from '@angular/forms';
+;
 export type ChartOptions = {
   chart: ApexChart; //tipo de grafica
   annotations: ApexAnnotations;
@@ -49,18 +55,30 @@ export type ChartOptions = {
 @Component({
   selector: 'app-contactos',
   standalone: true,
-  imports: [NgApexchartsModule],
+  imports: [NgApexchartsModule, CommonModule,FormsModule], //Importando el CommonModule
   templateUrl: './contactos.component.html',
   styleUrl: './contactos.component.css',
 })
-export class ContactosComponent {
+export class ContactosComponent implements OnInit {
   @ViewChild('chart') chart: ChartComponent | undefined;
   public chartOptions: Partial<ChartOptions> | undefined;
   public series: ApexAxisChartSeries | ApexNonAxisChartSeries | undefined;
 
+  providers: any[] = []; //array para almacenar los datos del provedor
+  nuevoProveedor = {
+    nombre:'',
+    No_Licencia_ambiental: "",
+    domicilio:'',
+    telefono:'',
+    correo:''
+  }
+  
+  
+
   constructor(
     private flowbiteService: FlowbiteService,
-    @Inject(PLATFORM_ID) private platformId: any
+    @Inject(PLATFORM_ID) private platformId: any,
+    private apiService: ApiService //servicio para la comunicacion con la API
   ) {
     this.series = [
       {
@@ -173,5 +191,35 @@ export class ContactosComponent {
     this.flowbiteService.loadFlowbite((flowbite) => {
       console.log('Flowbiteloaded', flowbite);
     });
+
+    this.loadProveedores(); //carga los datos de los proveedores
   }
+  //este va a ser el metodo para mostrar los provedores
+  loadProveedores(): void{
+    this.apiService.getProveedores().subscribe({
+      next: (data: any) =>{
+        console.log('provedor: ',data); //muestra los datos de los proveedores en la consola
+        this.providers = data; //Asignar los datos a la variable providers
+      },
+      error: (error) =>{
+        console.error('Error fetching providers: ',error); //Manejo de errores si ocurre algun problema
+      }
+    });
+  }
+  deleteProvedor(id: number): void{
+    this.apiService.deleteProveedor(id).subscribe({
+      next: (response) => {
+        console.log(response.message);
+      },
+      error: (err) => {
+        console.error('Error eliminando al proveedor: ',err);
+      },
+      complete: () =>{
+        console.log('Operacion de eliminacion completada');
+        this.loadProveedores();
+      }
+    });
+  }
+ 
+  
 }
