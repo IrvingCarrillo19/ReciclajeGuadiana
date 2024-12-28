@@ -1,13 +1,15 @@
 import { create } from "zustand";
 
 type Store = {
-  count: number;
-  inc: () => void;
+  user: string;
+  loggedIn: boolean;
+  setLoggedIn: (loggedIn: boolean) => void;
 };
 
 const useStore = create<Store>()((set) => ({
-  count: 1,
-  inc: () => set((state) => ({ count: state.count + 1 })),
+  user: "",
+  loggedIn: false,
+  setLoggedIn: (val) => set({ loggedIn: val }),
 }));
 
 export default useStore;

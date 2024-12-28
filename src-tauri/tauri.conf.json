@@ -13,7 +13,7 @@
     "windows": [
       {
         "title": "reciclaje-guadiana-front",
-        "fullscreen": true
+        "maximized": true
       }
     ],
     "security": {
