@@ -3,6 +3,7 @@ import logo from "../assets/logo.svg";
 import useStore from "../store";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import DotsBG from "../components/dotsBG";
 
 export default function LoginPage() {
   const loggedIn = useStore((state) => state.loggedIn);
@@ -24,7 +25,8 @@ export default function LoginPage() {
 
   return (
     <div className="w-svw h-svh flex justify-center items-center">
-      <Card className="w-1/3 max-w-xl">
+      <DotsBG />
+      <Card className="w-1/3 max-w-xl shadow-lg border-gray-300">
         <form
           className="flex w-full h-full justify-center items-center flex-col gap-4"
           onSubmit={handleLogin}
