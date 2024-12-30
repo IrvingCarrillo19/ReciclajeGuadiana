@@ -23,6 +23,9 @@ const customTheme: CustomFlowbiteTheme = {
       },
     },
   },
+  table: {
+    root: {},
+  },
 };
 
 export default customTheme;
