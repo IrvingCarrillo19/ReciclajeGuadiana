@@ -1,33 +1,52 @@
-import { Button, Table } from "flowbite-react";
+import { Button, Card, TextInput } from "flowbite-react";
+import TopPanel from "../../components/topPanel";
+import BarChart from "../../components/barChart";
+import EditModal from "../../components/editModal";
+import {
+  materialsModal,
+  materialsTableHeaders,
+  materialsTableKeys,
+} from "../../assets/materialConfig";
+import TableGenerator from "../../components/tableGenerator";
+import useDashboard from "../../hooks/useDashboard";
 
 export default function Materials() {
+  const { modalProps, tableProps, handleAdd } = useDashboard("materials");
+
   return (
-    <div className="w-full h-full flex flex-col items-end gap-4">
-      <div className="grid grid-cols-2"></div>
-      <Button gradientDuoTone="greenToBlue">Agregar nuevo</Button>
-      <div className="overflow-x-scroll w-full">
-        <Table>
-          <Table.Head>
-            <Table.HeadCell>Tipo</Table.HeadCell>
-            <Table.HeadCell>Valor unitario</Table.HeadCell>
-            <Table.HeadCell>Valor de venta</Table.HeadCell>
-            <Table.HeadCell>Acciones</Table.HeadCell>
-          </Table.Head>
-          <Table.Body>
-            <Table.Row>
-              <Table.Cell className="font-semibold">Material 1</Table.Cell>
-              <Table.Cell>$100</Table.Cell>
-              <Table.Cell>$150</Table.Cell>
-              <Table.Cell>
-                <div className="flex gap-4">
-                  <Button color="blue">Editar</Button>
-                  <Button color="failure">Eliminar</Button>
-                </div>
-              </Table.Cell>
-            </Table.Row>
-          </Table.Body>
-        </Table>
+    <>
+      <div className="w-full h-full flex flex-col items-end gap-4">
+        {/* Stats ----------------------------------------------------------------------------------------- */}
+        <div className="grid grid-cols-2 w-full gap-4">
+          <TopPanel
+            title="Más vendidos"
+            series={[
+              { name: "material 1", description: "$3050 vendido", value: 50 },
+              { name: "material 2", description: "$3050 vendido", value: 50 },
+              { name: "material 3", description: "$3050 vendido", value: 50 },
+            ]}
+          />
+          <BarChart />
+        </div>
+
+        {/* Table ----------------------------------------------------------------------------------------- */}
+        <Card className="w-full border-gray-300 mt-5">
+          <div className="flex justify-end gap-28 w-full">
+            <TextInput placeholder="Buscar por nombre" className="grow" />
+            <Button gradientDuoTone="greenToBlue" onClick={handleAdd}>
+              Agregar nuevo
+            </Button>
+          </div>
+          <TableGenerator
+            {...tableProps}
+            headers={materialsTableHeaders}
+            keys={materialsTableKeys}
+          />
+        </Card>
       </div>
-    </div>
+
+      {/* modal ----------------------------------------------------------------------------------------- */}
+      <EditModal {...modalProps} title="material" inputs={materialsModal} />
+    </>
   );
 }

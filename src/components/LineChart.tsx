@@ -35,7 +35,7 @@ export default function LineChart() {
       width: 6,
     },
     grid: {
-      show: false,
+      show: true,
       strokeDashArray: 4,
       padding: {
         left: 2,
@@ -77,7 +77,7 @@ export default function LineChart() {
   ];
   return (
     <Card className="hover:scale-105 transition-transform border-gray-300">
-      <Chart type="area" options={options} series={series} />
+      <Chart type="area" height="320px" options={options} series={series} />
     </Card>
   );
 }
