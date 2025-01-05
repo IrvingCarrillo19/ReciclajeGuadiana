@@ -4,6 +4,7 @@ import Service from "../services/service";
 export default function useDashboard(name: string) {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentItem, setCurrentItem] = useState(null);
+  const [search, setSearch] = useState("");
   const serviceRef = useRef(new Service(name));
   const [refresh, setRefresh] = useState({});
 
@@ -33,6 +34,11 @@ export default function useDashboard(name: string) {
       onEdit: handleEdit,
       refresh: refresh,
       service: serviceRef.current,
+      search: search,
+    },
+    searchProps: {
+      value: search,
+      onChange: (e: any) => setSearch(e.target.value),
     },
     handleAdd,
   };

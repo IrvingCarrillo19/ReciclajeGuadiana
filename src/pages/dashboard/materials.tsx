@@ -11,7 +11,8 @@ import TableGenerator from "../../components/tableGenerator";
 import useDashboard from "../../hooks/useDashboard";
 
 export default function Materials() {
-  const { modalProps, tableProps, handleAdd } = useDashboard("materials");
+  const { modalProps, tableProps, searchProps, handleAdd } =
+    useDashboard("materials");
 
   return (
     <>
@@ -32,13 +33,18 @@ export default function Materials() {
         {/* Table ----------------------------------------------------------------------------------------- */}
         <Card className="w-full border-gray-300 mt-5">
           <div className="flex justify-end gap-28 w-full">
-            <TextInput placeholder="Buscar por nombre" className="grow" />
+            <TextInput
+              {...searchProps}
+              placeholder="Buscar por nombre"
+              className="grow"
+            />
             <Button gradientDuoTone="greenToBlue" onClick={handleAdd}>
               Agregar nuevo
             </Button>
           </div>
           <TableGenerator
             {...tableProps}
+            searchFields="nombre"
             headers={materialsTableHeaders}
             keys={materialsTableKeys}
           />

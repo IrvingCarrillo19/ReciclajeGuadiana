@@ -11,7 +11,8 @@ import {
 import EditModal from "../../components/editModal";
 
 export default function Suppliers() {
-  const { modalProps, tableProps, handleAdd } = useDashboard("proveedor");
+  const { modalProps, tableProps, searchProps, handleAdd } =
+    useDashboard("proveedor");
 
   return (
     <>
@@ -32,13 +33,18 @@ export default function Suppliers() {
         {/* Table ----------------------------------------------------------------------------------------- */}
         <Card className="w-full border-gray-300 mt-5">
           <div className="flex justify-end gap-28 w-full">
-            <TextInput placeholder="Buscar por nombre" className="grow" />
+            <TextInput
+              {...searchProps}
+              placeholder="Buscar por nombre"
+              className="grow"
+            />
             <Button gradientDuoTone="greenToBlue" onClick={handleAdd}>
               Agregar nuevo
             </Button>
           </div>
           <TableGenerator
             {...tableProps}
+            searchFields="nombre"
             headers={suppliersTableHeaders}
             keys={suppliersTableKeys}
           />

@@ -2,17 +2,26 @@ import { Button, Table } from "flowbite-react";
 import Service from "../services/service";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { normalizeSrt } from "../services/utils";
+import useSearch from "../hooks/useSearch";
 
 interface TableGeneratorProps {
   headers: string[];
   keys: string[];
   service: Service;
   onEdit?: (item: any) => void;
+  search?: string;
+  searchFields?: string;
   refresh?: {};
 }
 
 export default function TableGenerator(props: TableGeneratorProps) {
   const [data, setData] = useState([]);
+  const filteredData = useSearch({
+    data,
+    search: props.search ?? "",
+    searchFields: props.searchFields ?? "",
+  });
 
   useEffect(() => {
     fetchData();
@@ -78,7 +87,7 @@ export default function TableGenerator(props: TableGeneratorProps) {
           <Table.HeadCell>Acciones</Table.HeadCell>
         </Table.Head>
         <Table.Body>
-          {data?.map((item: any, index: number) => {
+          {filteredData?.map((item: any, index: number) => {
             return (
               <Table.Row key={`item_${item.id}_${index}`}>
                 {props.keys.map((key, index) => (
