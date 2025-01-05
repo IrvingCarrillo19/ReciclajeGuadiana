@@ -1,7 +1,8 @@
-import { Button, Label, Modal, TextInput } from "flowbite-react";
+import { Button, Label, Modal, Select, TextInput } from "flowbite-react";
 import Service from "../services/service";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import useStore from "../store";
 
 interface EditModalProps {
   open?: boolean;
@@ -19,6 +20,7 @@ export interface Input {
   type: string;
   required?: boolean;
   value?: any;
+  options?: string[];
 }
 
 export default function EditModal(props: EditModalProps) {
@@ -83,6 +85,78 @@ function InputGenerator(props: Input) {
           />
         );
       else return null;
+
+    case "user":
+      const userID = useStore((state) => state.userId);
+      return (
+        <input
+          type="hidden"
+          name={props.name}
+          defaultValue={props.value ?? userID}
+        />
+      );
+
+    case "section":
+      return (
+        <div className="w-full">
+          <h3 className="text-lg font-bold">{props.name}</h3>
+        </div>
+      );
+
+    case "combo":
+      return (
+        <div className="w-full">
+          <div className="mb-2 block">
+            <Label value={props.label} />
+          </div>
+          <Select
+            name={props.name}
+            required={props.required}
+            defaultValue={props.value ?? ""}
+          >
+            {props.options?.map((item: any) => {
+              return (
+                <option key={`combo_option_${item}`} value={item}>
+                  {item}
+                </option>
+              );
+            })}
+          </Select>
+        </div>
+      );
+
+    case "combo_table":
+      const [items, setItems] = useState([]);
+
+      useEffect(() => {
+        async function fetchItems() {
+          const service = new Service(props.label?.toLowerCase() ?? "");
+          const res = await service.get();
+          setItems(res);
+        }
+        fetchItems();
+      }, []);
+
+      return (
+        <div className="w-full">
+          <div className="mb-2 block">
+            <Label value={props.label} />
+          </div>
+          <Select
+            name={props.name}
+            required={props.required}
+            defaultValue={props.value ?? ""}
+          >
+            {items?.map((item: any) => {
+              return (
+                <option key={item.id} value={item.id}>
+                  {item[props.placeholder ?? "nombre"]}
+                </option>
+              );
+            })}
+          </Select>
+        </div>
+      );
 
     default:
       return (

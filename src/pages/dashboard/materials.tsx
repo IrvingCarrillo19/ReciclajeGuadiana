@@ -12,7 +12,7 @@ import useDashboard from "../../hooks/useDashboard";
 
 export default function Materials() {
   const { modalProps, tableProps, searchProps, handleAdd } =
-    useDashboard("materials");
+    useDashboard("material");
 
   return (
     <>

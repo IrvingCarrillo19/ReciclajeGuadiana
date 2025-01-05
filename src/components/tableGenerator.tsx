@@ -2,7 +2,6 @@ import { Button, Table } from "flowbite-react";
 import Service from "../services/service";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import { normalizeSrt } from "../services/utils";
 import useSearch from "../hooks/useSearch";
 
 interface TableGeneratorProps {

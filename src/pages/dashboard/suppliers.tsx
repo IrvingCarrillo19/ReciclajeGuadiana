@@ -52,7 +52,7 @@ export default function Suppliers() {
       </div>
 
       {/* modal ----------------------------------------------------------------------------------------- */}
-      <EditModal {...modalProps} title="material" inputs={suppliersModal} />
+      <EditModal {...modalProps} title="proveedor" inputs={suppliersModal} />
     </>
   );
 }
