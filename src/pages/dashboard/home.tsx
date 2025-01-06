@@ -4,6 +4,7 @@ import { MdOutlineBarChart } from "react-icons/md";
 import { BiSolidDashboard } from "react-icons/bi";
 import { Card, Select, Table } from "flowbite-react";
 import LineChart from "../../components/LineChart";
+import BarChart from "../../components/barChart";
 
 export default function Home() {
   return (
@@ -31,8 +32,8 @@ export default function Home() {
               <option>2024</option>
             </Select>
           </div>
-          <LineChart />
-          <LineChart />
+          <BarChart />
+          <BarChart />
           <div className="col-span-2">
             <Table hoverable>
               <Table.Head>

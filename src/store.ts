@@ -4,14 +4,15 @@ type Store = {
   user: string;
   userId: string;
   loggedIn: boolean;
-  setLoggedIn: (loggedIn: boolean) => void;
+  setLoggedIn: (loggedIn: boolean, user: string, userId: string) => void;
 };
 
 const useStore = create<Store>()((set) => ({
   user: "",
   userId: "",
   loggedIn: false,
-  setLoggedIn: (val) => set({ loggedIn: val }),
+  setLoggedIn: (logged, user, userId) =>
+    set({ loggedIn: logged, user, userId }),
 }));
 
 export default useStore;

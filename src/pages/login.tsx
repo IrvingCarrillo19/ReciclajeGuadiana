@@ -4,6 +4,8 @@ import useStore from "../store";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import DotsBG from "../components/dotsBG";
+import LoginService from "../services/LoginService";
+import Swal from "sweetalert2";
 
 export default function LoginPage() {
   const loggedIn = useStore((state) => state.loggedIn);
@@ -16,11 +18,19 @@ export default function LoginPage() {
     }
   }, []);
 
-  const handleLogin = (e: any) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("login");
-    setLoggedIn(true);
-    navigate("/dashboard");
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+    const service = new LoginService();
+    const res = await service.login(data);
+    if (!res?.message) {
+      console.log(res);
+      setLoggedIn(true, res.nombre, res.id);
+      navigate("/dashboard");
+    } else {
+      Swal.fire("Error", res.message, "error");
+    }
   };
 
   return (
@@ -40,21 +50,21 @@ export default function LoginPage() {
           <h1>Reciclajes Guadiana S.A. de C.V.</h1>
           <div className="w-full">
             <div className="mb-2 block">
-              <Label htmlFor="email" value="Usuario" />
+              <Label value="Usuario" />
             </div>
             <TextInput
-              id="email"
-              type="email"
-              placeholder="ejemplo@dominio.com"
+              name="nombre"
+              type="text"
+              placeholder="Introduce tu usuario"
               required
             />
           </div>
           <div className="w-full">
             <div className="mb-2 block">
-              <Label htmlFor="password" value="Contraseña" />
+              <Label value="Contraseña" />
             </div>
             <TextInput
-              id="password"
+              name="password"
               type="password"
               placeholder="Tu contraseña"
               required

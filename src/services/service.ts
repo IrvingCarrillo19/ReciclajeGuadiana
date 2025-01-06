@@ -4,10 +4,12 @@ import { fetch } from "@tauri-apps/plugin-http";
 export default class Service {
   Env: Env;
   name: string;
+  fetch: any;
 
   constructor(name: string) {
     this.Env = new Env();
     this.name = name;
+    this.fetch = fetch;
   }
 
   async get() {

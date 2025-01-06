@@ -88,7 +88,7 @@ export const deliveriesModal: Input[] = [
     type: "combo",
     name: "tipo_reporte",
     label: "Tipo de reporte",
-    options: ["Diario", "Semanal", "Mensual"],
+    options: ["Diario"],
   },
   {
     type: "user",
