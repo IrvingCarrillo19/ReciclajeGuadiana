@@ -34,7 +34,6 @@ export default function TableGenerator(props: TableGeneratorProps) {
     try {
       const res = await props.service.get();
       setData(res);
-      console.log(res);
     } catch (error) {
       console.error(error);
     }
@@ -91,7 +90,9 @@ export default function TableGenerator(props: TableGeneratorProps) {
               <Table.Row key={`item_${item.id}_${index}`}>
                 {props.keys.map((key, index) => (
                   <Table.Cell key={`item_${item.id}_${index}`}>
-                    {item[key]}
+                    {key
+                      .split(".")
+                      .reduce((acc, part) => acc && acc[part], item)}
                   </Table.Cell>
                 ))}
                 <Table.Cell>

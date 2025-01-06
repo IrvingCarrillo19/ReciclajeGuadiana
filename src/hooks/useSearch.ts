@@ -10,11 +10,15 @@ interface useSearchProps {
 export default function useSearch(props: useSearchProps) {
   const [search, setSearch] = useState(props.search);
   const [filteredData, setFilteredData] = useState(props.data);
-  const cols = "nombre";
+  const cols = props.searchFields;
 
   useEffect(() => {
     setSearch(props.search);
   }, [props.search]);
+
+  useEffect(() => {
+    setFilteredData(props.data);
+  }, [props.data]);
 
   useEffect(() => {
     if (search === "") {
@@ -22,13 +26,14 @@ export default function useSearch(props: useSearchProps) {
     } else {
       setFilteredData(
         props.data.filter((item: any) =>
-          cols
-            .split(" ")
-            .some((key) =>
-              normalizeSrt(item[key].toString()).includes(
-                normalizeSrt(search ?? "")
-              )
-            )
+          cols.split(" ").some((key) =>
+            normalizeSrt(
+              key
+                .split(".")
+                .reduce((acc, part) => acc && acc[part], item)
+                .toString()
+            ).includes(normalizeSrt(search ?? ""))
+          )
         )
       );
     }

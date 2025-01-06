@@ -107,8 +107,8 @@ export const deliveriesTableHeaders: string[] = [
 
 export const deliveriesTableKeys: string[] = [
   "numero_ticket",
-  "material.id",
-  "provedor.id",
+  "material.nombre",
+  "provedor.nombre",
   "peso_final",
   "ganancia",
   "createdAt",

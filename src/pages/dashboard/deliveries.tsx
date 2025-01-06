@@ -44,7 +44,7 @@ export default function Deliveries() {
           </div>
           <TableGenerator
             {...tableProps}
-            searchFields="material.nombre proveedor.nombre numero_ticket, fecha"
+            searchFields="material.nombre provedor.nombre numero_ticket createdAt"
             headers={deliveriesTableHeaders}
             keys={deliveriesTableKeys}
           />
