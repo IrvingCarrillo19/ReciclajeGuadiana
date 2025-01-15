@@ -2,6 +2,7 @@ import { Sidebar, Avatar } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
 import { IoLayers, IoAnalyticsSharp, IoIdCard } from "react-icons/io5";
 import { FaTruck } from "react-icons/fa";
+import { FaMoneyBillWave } from "react-icons/fa6";
 import logo from "../assets/logo.svg";
 import { useNavigate } from "react-router";
 
@@ -54,6 +55,13 @@ export default function Sidenav() {
             onClick={() => navigate("/dashboard/deliveries")}
           >
             Entregas
+          </Sidebar.Item>
+          <Sidebar.Item
+            icon={FaMoneyBillWave}
+            active={location.pathname.includes("sells")}
+            onClick={() => navigate("/dashboard/sells")}
+          >
+            Ventas
           </Sidebar.Item>
           <Sidebar.Item
             icon={IoAnalyticsSharp}

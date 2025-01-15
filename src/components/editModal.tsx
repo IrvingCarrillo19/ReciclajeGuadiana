@@ -59,7 +59,10 @@ export default function EditModal(props: EditModalProps) {
             <InputGenerator
               key={"InputGenerator_" + props.title + "_" + index}
               {...input}
-              value={props.currentItem?.[input.name]}
+              value={input.name
+                .replace("ID", ".id")
+                .split(".")
+                .reduce((acc, part) => acc && acc[part], props.currentItem)}
             />
           ))}
           <div className="w-full flex justify-end">
@@ -127,6 +130,7 @@ function InputGenerator(props: Input) {
 
     case "combo_table":
       const [items, setItems] = useState([]);
+      const [value, setValue] = useState(props.value);
 
       useEffect(() => {
         async function fetchItems() {
@@ -137,6 +141,10 @@ function InputGenerator(props: Input) {
         fetchItems();
       }, []);
 
+      const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setValue(e.target.value);
+      };
+
       return (
         <div className="w-full">
           <div className="mb-2 block">
@@ -145,7 +153,8 @@ function InputGenerator(props: Input) {
           <Select
             name={props.name}
             required={props.required}
-            defaultValue={props.value ?? ""}
+            value={value ?? ""}
+            onChange={handleChange}
           >
             {items?.map((item: any) => {
               return (

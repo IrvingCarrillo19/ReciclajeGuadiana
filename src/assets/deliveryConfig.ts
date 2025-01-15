@@ -46,7 +46,7 @@ export const deliveriesModal: Input[] = [
   },
   {
     type: "combo_table",
-    name: "proveedorID",
+    name: "provedorID",
     label: "Proveedor",
     placeholder: "nombre",
     required: true,
@@ -57,42 +57,6 @@ export const deliveriesModal: Input[] = [
     label: "Material",
     placeholder: "nombre",
     required: true,
-  },
-  //seccion de reporte para la entrega -------------
-  {
-    type: "section",
-    name: "Reporte",
-  },
-  {
-    type: "number",
-    name: "total_kilos_vendidos",
-    label: "Total kilos vendidos",
-    placeholder: "Total kilos vendidos",
-    required: true,
-  },
-  {
-    type: "number",
-    name: "ganancia_total",
-    label: "Ganancia total",
-    placeholder: "Ganancia total",
-    required: true,
-  },
-  {
-    type: "text",
-    name: "destino",
-    label: "Destino",
-    placeholder: "Destino",
-    required: true,
-  },
-  {
-    type: "combo",
-    name: "tipo_reporte",
-    label: "Tipo de reporte",
-    options: ["Diario"],
-  },
-  {
-    type: "user",
-    name: "usuarioID",
   },
 ];
 

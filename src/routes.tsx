@@ -6,6 +6,7 @@ import Materials from "./pages/dashboard/materials";
 import Suppliers from "./pages/dashboard/suppliers";
 import Reports from "./pages/dashboard/reports";
 import Deliveries from "./pages/dashboard/deliveries";
+import Sells from "./pages/dashboard/sells";
 
 export default function AppRoutes() {
   return (
@@ -18,6 +19,7 @@ export default function AppRoutes() {
           <Route path="material" element={<Materials />} />
           <Route path="suppliers" element={<Suppliers />} />
           <Route path="deliveries" element={<Deliveries />} />
+          <Route path="sells" element={<Sells />} />
           <Route path="reports" element={<Reports />} />
         </Route>
       </Routes>
