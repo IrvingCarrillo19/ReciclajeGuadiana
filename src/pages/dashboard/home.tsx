@@ -12,6 +12,8 @@ export default function Home() {
   const [ventas, setVentas] = useState(0);
   const [entregas, setEntregas] = useState(0);
   const [ganancias, setGanancias] = useState(0);
+  const [ventasData, setVentasData] = useState([]);
+  const [entregasData, setEntregasData] = useState([]);
 
   useEffect(() => {
     statsService
@@ -41,7 +43,26 @@ export default function Home() {
       .then((data) => {
         setGanancias(data);
       });
-  });
+    statsService
+      .ventas_chart({
+        start: new Date(),
+        end: new Date(),
+        type: "day",
+      })
+      .then((data) => {
+        setVentasData(data);
+        console.log(data);
+      });
+    statsService
+      .entregas_chart({
+        start: new Date(),
+        end: new Date(),
+        type: "day",
+      })
+      .then((data) => {
+        setEntregasData(data);
+      });
+  }, []);
   return (
     <div className="grid grid-cols-3 gap-4">
       <NumPanel
@@ -64,14 +85,15 @@ export default function Home() {
         <div className="grid grid-cols-2 gap-4">
           <div className="col-span-2 flex justify-end items-center">
             <Select>
-              <option>2021</option>
-              <option>2022</option>
-              <option>2023</option>
-              <option>2024</option>
+              <option value="day">Hoy</option>
+              <option value="week">Esta semana</option>
+              <option value="month">Este mes</option>
+              <option value="semester">Este semestre</option>
+              <option value="year">Este año</option>
             </Select>
           </div>
-          <BarChart />
-          <BarChart />
+          <BarChart series={ventasData} title="Ventas" />
+          <BarChart series={entregasData} title="Entregas" />
           <div className="col-span-2">
             <Table hoverable>
               <Table.Head>

@@ -1,7 +1,12 @@
 import { Card } from "flowbite-react";
 import Chart from "react-apexcharts";
 
-export default function BarChart() {
+interface BarChartProps {
+  series: ApexCharts.ApexOptions["series"];
+  title?: string;
+}
+
+export default function BarChart({ series = [], title }: BarChartProps) {
   const options: ApexCharts.ApexOptions = {
     colors: ["#1A56DB", "#FDBA8C"],
     chart: {
@@ -75,37 +80,9 @@ export default function BarChart() {
     },
   };
 
-  const series = [
-    {
-      name: "Organic",
-      color: "#1A56DB",
-      data: [
-        { x: "Mon", y: 231 },
-        { x: "Tue", y: 122 },
-        { x: "Wed", y: 63 },
-        { x: "Thu", y: 421 },
-        { x: "Fri", y: 122 },
-        { x: "Sat", y: 323 },
-        { x: "Sun", y: 111 },
-      ],
-    },
-    {
-      name: "Social media",
-      color: "#FDBA8C",
-      data: [
-        { x: "Mon", y: 232 },
-        { x: "Tue", y: 113 },
-        { x: "Wed", y: 341 },
-        { x: "Thu", y: 224 },
-        { x: "Fri", y: 522 },
-        { x: "Sat", y: 411 },
-        { x: "Sun", y: 243 },
-      ],
-    },
-  ];
-
   return (
     <Card className="hover:scale-105 transition-transform border-gray-300">
+      <h1 className="font-extrabold">{title}</h1>
       <Chart type="bar" height="320px" options={options} series={series} />
     </Card>
   );
