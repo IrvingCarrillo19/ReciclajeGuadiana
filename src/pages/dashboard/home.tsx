@@ -3,23 +3,61 @@ import { IoDocuments } from "react-icons/io5";
 import { MdOutlineBarChart } from "react-icons/md";
 import { BiSolidDashboard } from "react-icons/bi";
 import { Card, Select, Table } from "flowbite-react";
-import LineChart from "../../components/LineChart";
 import BarChart from "../../components/barChart";
+import StatsService from "../../services/StatsService";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const statsService = new StatsService();
+  const [ventas, setVentas] = useState(0);
+  const [entregas, setEntregas] = useState(0);
+  const [ganancias, setGanancias] = useState(0);
+
+  useEffect(() => {
+    statsService
+      .ventas_count({
+        start: new Date(),
+        end: new Date(),
+        type: "day",
+      })
+      .then((data) => {
+        setVentas(data);
+      });
+    statsService
+      .entregas_count({
+        start: new Date(),
+        end: new Date(),
+        type: "day",
+      })
+      .then((data) => {
+        setEntregas(data);
+      });
+    statsService
+      .ganancias_count({
+        start: new Date(),
+        end: new Date(),
+        type: "day",
+      })
+      .then((data) => {
+        setGanancias(data);
+      });
+  });
   return (
     <div className="grid grid-cols-3 gap-4">
-      <NumPanel icon={<IoDocuments />} title="Proveedores Activos" value="7" />
+      <NumPanel
+        icon={<IoDocuments />}
+        title="Ventas de hoy"
+        value={ventas.toLocaleString()}
+      />
       <NumPanel
         icon={<BiSolidDashboard />}
-        title="entregas de hoy"
-        value="5"
-        color="warning"
+        title="Entregas de hoy"
+        value={entregas.toLocaleString()}
       />
       <NumPanel
         icon={<MdOutlineBarChart />}
         title="Ganancias de hoy"
-        value="$3,500"
+        value={"$" + ganancias.toLocaleString()}
         color="success"
       />
       <Card className="col-span-3 border-gray-300">
