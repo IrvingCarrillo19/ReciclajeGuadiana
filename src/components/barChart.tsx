@@ -1,13 +1,40 @@
 import { Card } from "flowbite-react";
+import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 
 interface BarChartProps {
-  series: ApexCharts.ApexOptions["series"];
+  series: {
+    name?: string;
+    type?: string;
+    color?: string;
+    group?: string;
+    hidden?: boolean;
+    zIndex?: number;
+    data: {
+      x: any;
+      y: any;
+      fill?: ApexFill;
+      fillColor?: string;
+      strokeColor?: string;
+      meta?: any;
+      goals?: {
+        name?: string;
+        value: number;
+        strokeHeight?: number;
+        strokeWidth?: number;
+        strokeColor?: string;
+        strokeDashArray?: number;
+        strokeLineCap?: "butt" | "square" | "round";
+      }[];
+      barHeightOffset?: number;
+      columnWidthOffset?: number;
+    }[];
+  }[];
   title?: string;
 }
 
 export default function BarChart({ series = [], title }: BarChartProps) {
-  const options: ApexCharts.ApexOptions = {
+  const [options, setOptions] = useState<ApexCharts.ApexOptions>({
     colors: ["#1A56DB", "#FDBA8C"],
     chart: {
       height: "320px",
@@ -58,6 +85,8 @@ export default function BarChart({ series = [], title }: BarChartProps) {
     },
     xaxis: {
       floating: false,
+      type: "category",
+      categories: series[0]?.data.map((item) => item?.x),
       labels: {
         show: true,
         style: {
@@ -78,7 +107,17 @@ export default function BarChart({ series = [], title }: BarChartProps) {
     fill: {
       opacity: 1,
     },
-  };
+  });
+
+  useEffect(() => {
+    setOptions((prev: any) => ({
+      ...prev,
+      xaxis: {
+        ...prev.xaxis,
+        categories: series[0]?.data.map((item) => item?.x),
+      },
+    }));
+  }, [series]);
 
   return (
     <Card className="hover:scale-105 transition-transform border-gray-300">

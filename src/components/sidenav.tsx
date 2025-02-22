@@ -63,13 +63,6 @@ export default function Sidenav() {
           >
             Ventas
           </Sidebar.Item>
-          <Sidebar.Item
-            icon={IoAnalyticsSharp}
-            active={location.pathname.includes("reports")}
-            onClick={() => navigate("/dashboard/reports")}
-          >
-            Reportes
-          </Sidebar.Item>
         </Sidebar.ItemGroup>
       </Sidebar.Items>
     </Sidebar>

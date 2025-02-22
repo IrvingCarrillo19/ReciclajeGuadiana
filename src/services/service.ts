@@ -1,5 +1,4 @@
 import Env from "../config/env";
-import { fetch } from "@tauri-apps/plugin-http";
 
 export default class Service {
   Env: Env;

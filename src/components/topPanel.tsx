@@ -28,7 +28,7 @@ export default function TopPanel(props: TopPanelProps) {
                   </p>
                 </div>
                 <span className="text-blue-500 font-bold text-lg">
-                  {item.value}%
+                  {item.value}
                 </span>
               </li>
             );

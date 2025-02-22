@@ -4,8 +4,15 @@ import { MdOutlineBarChart } from "react-icons/md";
 import { BiSolidDashboard } from "react-icons/bi";
 import { Card, Select, Table } from "flowbite-react";
 import BarChart from "../../components/barChart";
-import StatsService from "../../services/StatsService";
+import StatsService, { type IntervalDto } from "../../services/StatsService";
 import { useEffect, useState } from "react";
+
+interface Proveedor {
+  nombre: string;
+  ganancia: string[];
+  merma: string[];
+  peso_final: string[];
+}
 
 export default function Home() {
   const statsService = new StatsService();
@@ -14,6 +21,14 @@ export default function Home() {
   const [ganancias, setGanancias] = useState(0);
   const [ventasData, setVentasData] = useState([]);
   const [entregasData, setEntregasData] = useState([]);
+  const [type, setType] = useState<IntervalDto["type"]>("day");
+
+  const [proveedores, setProveedores] = useState<Proveedor[]>([]);
+
+  const months =
+    new Date().getMonth() < 6
+      ? ["Ene", "Feb", "Mar", "Abr", "May", "Jun"]
+      : ["Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
 
   useEffect(() => {
     statsService
@@ -43,11 +58,18 @@ export default function Home() {
       .then((data) => {
         setGanancias(data);
       });
+    changeCharts("day");
+    statsService.proveedores_chart().then((data) => {
+      setProveedores(data);
+    });
+  }, []);
+
+  const changeCharts = (type: IntervalDto["type"]) => {
     statsService
       .ventas_chart({
         start: new Date(),
         end: new Date(),
-        type: "day",
+        type: type,
       })
       .then((data) => {
         setVentasData(data);
@@ -57,12 +79,17 @@ export default function Home() {
       .entregas_chart({
         start: new Date(),
         end: new Date(),
-        type: "day",
+        type: type,
       })
       .then((data) => {
         setEntregasData(data);
       });
-  }, []);
+  };
+
+  useEffect(() => {
+    changeCharts(type);
+  }, [type]);
+
   return (
     <div className="grid grid-cols-3 gap-4">
       <NumPanel
@@ -84,7 +111,9 @@ export default function Home() {
       <Card className="col-span-3 border-gray-300">
         <div className="grid grid-cols-2 gap-4">
           <div className="col-span-2 flex justify-end items-center">
-            <Select>
+            <Select
+              onChange={(e) => setType(e.target.value as IntervalDto["type"])}
+            >
               <option value="day">Hoy</option>
               <option value="week">Esta semana</option>
               <option value="month">Este mes</option>
@@ -98,12 +127,9 @@ export default function Home() {
             <Table hoverable>
               <Table.Head>
                 <Table.HeadCell>Proveedor</Table.HeadCell>
-                <Table.HeadCell>Enero</Table.HeadCell>
-                <Table.HeadCell>Febrero</Table.HeadCell>
-                <Table.HeadCell>Marzo</Table.HeadCell>
-                <Table.HeadCell>Abril</Table.HeadCell>
-                <Table.HeadCell>Mayo</Table.HeadCell>
-                <Table.HeadCell>Junio</Table.HeadCell>
+                {months.map((month) => (
+                  <Table.HeadCell key={month}>{month}</Table.HeadCell>
+                ))}
                 <Table.HeadCell>Merma General</Table.HeadCell>
                 <Table.HeadCell>Material total</Table.HeadCell>
                 <Table.HeadCell>
@@ -111,23 +137,30 @@ export default function Home() {
                 </Table.HeadCell>
               </Table.Head>
               <Table.Body className="divide-y">
-                {Array.from({ length: 10 }).map((_, i) => {
+                {proveedores.map((p, i) => {
                   return (
                     <Table.Row
                       key={`reporte_${i}`}
                       className="bg-white dark:border-gray-700 dark:bg-gray-800"
                     >
                       <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                        {"Proveedor A"}
+                        {p.nombre}
                       </Table.Cell>
-                      <Table.Cell>$1,000</Table.Cell>
-                      <Table.Cell>$1,000</Table.Cell>
-                      <Table.Cell>$1,000</Table.Cell>
-                      <Table.Cell>$1,000</Table.Cell>
-                      <Table.Cell>$1,000</Table.Cell>
-                      <Table.Cell>$1,000</Table.Cell>
-                      <Table.Cell>$1,000</Table.Cell>
-                      <Table.Cell>$1,000</Table.Cell>
+                      {p.ganancia.map((g, i) => (
+                        <Table.Cell key={`ganancias_${i}`}>{g}</Table.Cell>
+                      ))}
+                      <Table.Cell>
+                        {p.merma.reduce(
+                          (acc, prev) => Number(prev) + Number(acc) + "",
+                          "0"
+                        )}
+                      </Table.Cell>
+                      <Table.Cell>
+                        {p.ganancia.reduce(
+                          (acc, prev) => Number(prev) + Number(acc) + "",
+                          "0"
+                        )}
+                      </Table.Cell>
                     </Table.Row>
                   );
                 })}
