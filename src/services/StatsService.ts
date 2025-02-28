@@ -21,21 +21,18 @@ export default class StatsService extends Service {
   }
 
   async ventas_count(data: IntervalDto) {
-    const response = await this.fetch(
-      `${this.Env.HOST}/${this.name}/ventas-count`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    );
+    const response = await fetch(`${this.Env.HOST}/${this.name}/ventas-count`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
     return await response.json();
   }
 
   async entregas_count(data: IntervalDto) {
-    const response = await this.fetch(
+    const response = await fetch(
       `${this.Env.HOST}/${this.name}/entregas-count`,
       {
         method: "POST",
@@ -49,7 +46,7 @@ export default class StatsService extends Service {
   }
 
   async ganancias_count(data: IntervalDto) {
-    const response = await this.fetch(
+    const response = await fetch(
       `${this.Env.HOST}/${this.name}/ganancias-count`,
       {
         method: "POST",
@@ -63,21 +60,18 @@ export default class StatsService extends Service {
   }
 
   async ventas_chart(data: IntervalDto) {
-    const response = await this.fetch(
-      `${this.Env.HOST}/${this.name}/ventas-chart`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    );
+    const response = await fetch(`${this.Env.HOST}/${this.name}/ventas-chart`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
     return await response.json();
   }
 
   async entregas_chart(data: IntervalDto) {
-    const response = await this.fetch(
+    const response = await fetch(
       `${this.Env.HOST}/${this.name}/entregas-chart`,
       {
         method: "POST",
@@ -91,61 +85,64 @@ export default class StatsService extends Service {
   }
 
   async topMaterials() {
-    const response = await this.fetch(
+    const response = await fetch(
       `${this.Env.HOST}/${this.name}/top/materiales`
     );
     return await response.json();
   }
 
   async topProveedores() {
-    const response = await this.fetch(
+    const response = await fetch(
       `${this.Env.HOST}/${this.name}/top/proveedores`
     );
     return await response.json();
   }
 
   async materials_chart() {
-    const response = await this.fetch(
+    const response = await fetch(
       `${this.Env.HOST}/${this.name}/materiales-ingresos`
     );
     return await response.json();
   }
 
   async proveedores_chart() {
-    const response = await this.fetch(
+    const response = await fetch(
       `${this.Env.HOST}/${this.name}/proveedores-ingresos`
     );
     return await response.json();
   }
 
   async getTableData(data: TableData) {
-    const response = await this.fetch(
-      `${this.Env.HOST}/${this.name}/reporte-data`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    );
+    const response = await fetch(`${this.Env.HOST}/${this.name}/reporte-data`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
     return await response.json();
   }
 
   async generatePDF(data: TableData) {
     const tableData = await this.getTableData(data);
     console.log(tableData);
+    const keys = Object.keys(tableData[0].ganancias || {});
     const docDefinition = {
       content: [
         {
           table: {
             headerRows: 1,
-            widths: Array(data.columns.length + 1).fill("*"),
+            widths: ["*", ...Array(data.columns.length).fill("*"), "*", "*"],
             body: [
-              ["Nombre", ...data.columns],
+              ["Proveedor", ...keys, "Merma General", "Material total"],
               ...tableData.map((row: any) => [
                 row.nombre,
-                ...data.columns.map((col: any) => row[col] || 0),
+                ...keys.map((key: any) => row[key] || 0),
+                row.merma.reduce((acc: number, prev: number) => acc + prev, 0),
+                row.ganancia.reduce(
+                  (acc: number, prev: number) => acc + prev,
+                  0
+                ),
               ]),
             ],
           },

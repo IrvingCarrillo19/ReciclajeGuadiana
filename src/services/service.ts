@@ -3,12 +3,10 @@ import Env from "../config/env";
 export default class Service {
   Env: Env;
   name: string;
-  fetch: any;
 
   constructor(name: string) {
     this.Env = new Env();
     this.name = name;
-    this.fetch = fetch;
   }
 
   async get() {

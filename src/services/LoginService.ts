@@ -6,7 +6,7 @@ export default class LoginService extends Service {
   }
 
   async login(data: any) {
-    const response = await this.fetch(`${this.Env.HOST}/${this.name}/login`, {
+    const response = await fetch(`${this.Env.HOST}/${this.name}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
