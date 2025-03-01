@@ -1,6 +1,4 @@
 import { Button, Card, TextInput } from "flowbite-react";
-import BarChart from "../../components/barChart";
-import TopPanel from "../../components/topPanel";
 import TableGenerator from "../../components/tableGenerator";
 import EditModal from "../../components/editModal";
 import useDashboard from "../../hooks/useDashboard";
