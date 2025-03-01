@@ -1,24 +1,25 @@
-import { Button, TextInput } from "flowbite-react";
+import { Button } from "flowbite-react";
 import useStore from "../store";
 import { useNavigate } from "react-router";
 import StatsService from "../services/StatsService";
+import EditModal from "./editModal";
+import { pdfModal } from "../assets/pdfConfig";
+import { useState } from "react";
 
 export default function Header() {
   const setLoggedIn = useStore((state) => state.setLoggedIn);
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
 
   const handleLogout = () => {
     setLoggedIn(false, "", "");
     navigate("/");
   };
 
-  const handleGeneratePDF = async () => {
+  const handleGeneratePDF = async (data: any) => {
     const statsService = new StatsService();
-    await statsService.generatePDF({
-      type: "semester",
-      time: "2025-1",
-      columns: ["merma", "peso_final", "ganancia"],
-    });
+    const reqData = { ...data, columns: ["merma", "ganancia"] };
+    return await statsService.generatePDF(reqData);
   };
 
   return (
@@ -26,7 +27,7 @@ export default function Header() {
       <Button
         gradientDuoTone="greenToBlue"
         className="mx-8"
-        onClick={handleGeneratePDF}
+        onClick={() => setOpen(true)}
       >
         Generar Reporte
       </Button>
@@ -36,6 +37,14 @@ export default function Header() {
       >
         Cerrar Sesión
       </span>
+
+      <EditModal
+        open={open}
+        title="Generar Reporte"
+        customFetch={handleGeneratePDF}
+        onClose={() => setOpen(false)}
+        inputs={pdfModal}
+      />
     </div>
   );
 }

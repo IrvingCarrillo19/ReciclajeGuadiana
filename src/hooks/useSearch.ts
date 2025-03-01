@@ -26,14 +26,14 @@ export default function useSearch(props: useSearchProps) {
     } else {
       setFilteredData(
         props.data.filter((item: any) =>
-          cols.split(" ").some((key) =>
-            normalizeSrt(
-              key
-                .split(".")
-                .reduce((acc, part) => acc && acc[part], item)
-                .toString()
-            ).includes(normalizeSrt(search ?? ""))
-          )
+          cols
+            .split(" ")
+            .some((key) =>
+              normalizeSrt(
+                "" +
+                  key.split(".").reduce((acc, part) => acc && acc[part], item)
+              ).includes(normalizeSrt(search ?? ""))
+            )
         )
       );
     }

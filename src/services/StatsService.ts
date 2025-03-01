@@ -1,6 +1,7 @@
 import pdfMake from "pdfmake/build/pdfmake";
 import Service from "./service";
 import pdfFonts from "pdfmake/build/vfs_fonts";
+import { TDocumentDefinitions } from "pdfmake/interfaces";
 
 pdfMake.vfs = pdfFonts.vfs;
 
@@ -125,24 +126,42 @@ export default class StatsService extends Service {
 
   async generatePDF(data: TableData) {
     const tableData = await this.getTableData(data);
-    console.log(tableData);
-    const keys = Object.keys(tableData[0].ganancias || {});
-    const docDefinition = {
+
+    const columns = calculateCols(data.type, data.time) ?? [];
+
+    const docDefinition: TDocumentDefinitions = {
+      pageSize: "LETTER",
+      pageOrientation: "landscape",
+      pageMargins: 10,
       content: [
         {
           table: {
             headerRows: 1,
-            widths: ["*", ...Array(data.columns.length).fill("*"), "*", "*"],
+            widths: ["*", ...Array(columns.length).fill("auto"), "*", "*"],
             body: [
-              ["Proveedor", ...keys, "Merma General", "Material total"],
+              [
+                { text: "Proveedor", fontSize: 10 },
+                ...columns.map((col) => ({ text: col, fontSize: 10 })),
+                { text: "Merma Total", fontSize: 10 },
+                { text: "Material Total", fontSize: 10 },
+              ],
               ...tableData.map((row: any) => [
-                row.nombre,
-                ...keys.map((key: any) => row[key] || 0),
-                row.merma.reduce((acc: number, prev: number) => acc + prev, 0),
-                row.ganancia.reduce(
-                  (acc: number, prev: number) => acc + prev,
-                  0
-                ),
+                { text: row.nombre, fontSize: 10 },
+                ...row.ganancia.map((g: any) => ({ text: g, fontSize: 10 })),
+                {
+                  text: row.merma.reduce(
+                    (acc: any, prev: any) => Number(prev) + Number(acc) + "",
+                    "0"
+                  ),
+                  fontSize: 10,
+                },
+                {
+                  text: row.ganancia.reduce(
+                    (acc: any, prev: any) => Number(prev) + Number(acc) + "",
+                    "0"
+                  ),
+                  fontSize: 10,
+                },
               ]),
             ],
           },
@@ -157,5 +176,49 @@ export default class StatsService extends Service {
       // Abrir en una nueva ventana o un WebView de Tauri
       window.open(pdfUrl);
     });
+  }
+
+  async getYears() {
+    const response = await fetch(`${this.Env.HOST}/${this.name}/years`);
+    return await response.json();
+  }
+
+  async getSemesters() {
+    const response = await fetch(`${this.Env.HOST}/${this.name}/semesters`);
+    return await response.json();
+  }
+}
+
+function calculateCols(type: string, time: string) {
+  switch (type) {
+    case "semester":
+      const semesterNumber = time.split("-")[1];
+      return semesterNumber === "1"
+        ? ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"]
+        : [
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre",
+          ];
+    case "year":
+      return [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre",
+      ];
+    default:
+      return;
   }
 }

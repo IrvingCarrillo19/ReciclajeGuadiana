@@ -86,7 +86,7 @@ export default function BarChart({ series = [], title }: BarChartProps) {
     xaxis: {
       floating: false,
       type: "category",
-      categories: series[0]?.data.map((item) => item?.x),
+      categories: series[0]?.data.map((item) => "" + item?.x),
       labels: {
         show: true,
         style: {
